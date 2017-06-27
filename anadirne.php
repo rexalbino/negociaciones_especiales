@@ -1,6 +1,15 @@
-<?php 
-<?php
 
+<?php
+require("connection.php");
+
+session_start();
+$user=$_SESSION['id'];
+$sql2="SELECT * FROM `usuarios` WHERE `id_usuario`='$user'";
+$resultado2 = mysqli_query($link,$sql2) ;
+$row2 = mysqli_fetch_array($resultado2);
+if (@!$_SESSION['user']) {
+	header("Location:login.php");
+} 
 
 
 ?>
@@ -19,8 +28,6 @@
       
     <body class="#000000 black">
         <?php
-
-			require("connection.php");
             
             $gupocliente='';
             $whofactures='';
@@ -47,13 +54,13 @@
             $id_producto6='';// x7
             $id_producto7='';// x7
 
-            $precio_pro_actual1=''//x7
-            $precio_pro_actual2=''//x7
-            $precio_pro_actual3=''//x7
-            $precio_pro_actual4=''//x7
-            $precio_pro_actual5=''//x7
-            $precio_pro_actual6=''//x7
-            $precio_pro_actual7=''//x7
+            $precio_pro_actual1='';//x7
+            $precio_pro_actual2='';//x7
+            $precio_pro_actual3='';//x7
+            $precio_pro_actual4='';//x7
+            $precio_pro_actual5='';//x7
+            $precio_pro_actual6='';//x7
+            $precio_pro_actual7='';//x7
             
             $caracteristicaadi1='';//x7
             $caracteristicaadi2='';//x7
@@ -332,15 +339,15 @@
             $Precio_venta_final1=$_GET['preciofinal1'];//x7
             $end_date1=$_GET['endate1'];//x7
             $carro_costo1=$_GET['carrocosto1'];//x7
-            $acceso_costo7=$_GET['accesocosto1'];
+            $acceso_costo1=$_GET['accesocosto1'];
             $another_costo1=$_GET['otrocosto1'];//x7
             $comentario_controllin=$_GET['testoim'];//x1
 
-            $gupocliente=$_GET['grucli'];
+            $gupocliente=$_GET['grucli'];//aqui
             $whofactures=$_GET['whofacture'];
             $folio=$_GET['folio'];
-            $concecionario=$_GET['concecionario'];
-            $nombre=$_GET['quienes'];
+            $concecionario=$_GET['concecionario'];//aqui
+            $nombre=$_GET['quienes'];//aqui
             $Vigencipropu=$_GET['vigpro'];
             $descripcion=$_GET['descripcion'];
 
@@ -353,7 +360,7 @@
 
         
         
-            if(){
+            if(empty($gupocliente) || empty($whofactures) || empty($folio) || empty($concecionario) || empty($nombre) || empty($Vigencipropu) || empty($descripcion)){
                 echo "<script language=javaScript>alert('No se a podido cargar el articulo');</script>";
                 
                 echo "<h1 class='center-align #afb42b lime darken-2'>Algo salio mal</h1>";?>
@@ -372,7 +379,7 @@
         </div>
                 
             <?php }else{
-                $sql2="INSERT INTO `proveedores` (`id_proveedor`, `prob_nombre`, `id_monedau`, `prob_clabe`, `prob_cuenta`, `prob_sucursal`, `prob_swift`, `prob_abba`, `prob_ref`) VALUES (NULL, '$nombre', '$moneda', '$clabe', '$cuenta', '$sucursal', '$swift', '$abba', '$ref');";
+                $sql2="INSERT INTO `fact_camiones` (`id_pedido`, `comentario_user`, `id_producto`, `precio_proccc`, `adicional`, `id_carrocero`, `precio_carrr`, `id_segmento`, `anio`, `cantidad`, `volumen_total`, `id_moneda`, `precio_lista`, `precio_solicitado`, `descuento`, `descuento_precent`, `fecha_factura_mtb`, `piso_adicional`, `garantia_extendida`, `id_monedabono`, `bono_whosale`, `bono_retail`, `accesorios_costo`, `carroceria_otro`, `flete_destino`, `flete_costo`, `enganche_money`, `enganche_percent`, `forma_amortisacion`, `plazo_pago`, `precio_venta`, `fecha_facturacion_cliente`, `carroceria_costo`, `accesorios`, `otros_costos`, `id_who_facture`, `Comentario_controlling`, `folio`, `vigencia`, `aprovado`, `id_usuario`, `grupo_cliente`, `concecionarooi`, `Nombre`) VALUES (NULL, '$descripcion', '$id_producto1', '$precio_pro_actual1', '$caracteristicaadi1', '$id_carro1', '$precio_carro_actual1', '$segmento1', '$anio_modelo1', '$volumen_aparte1', '$volumen_total', '$tipo_moneda1', '$precio_lista1', '$precio_solicitado1', '$descuentonumber1', '$descuentopercent1', '$datefac1', '$aditional_floor1', '$extendedguarr1', '$moneybono1', '$bonowhosale1', '$bonoretail1', '$accesorio1', '$carro_another_config1', '$flete_destino1', '$flete_costo1', '$engancheprecio1', '$enganchepercent1', '$forma_amotizacion1', '$plaso_pago1', '$Precio_venta_final1', '$end_date1', '$carro_costo1', '$acceso_costo1', '$another_costo1', '$whofactures', '$comentario_controllin', '$folio', '$Vigencipropu', '0', '$user','$gupocliente','$$concecionario','$nombre');";
                 mysqli_query($link,$sql2);
                // echo "<script language=javaScript>alert('Proveedor cargado exitosamente');</script>";
                 

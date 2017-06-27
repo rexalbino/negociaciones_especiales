@@ -153,16 +153,16 @@ if (@!$_SESSION['user']) {
         <div class="#ffffff white">
             <h2>Agregar nueva Negociacion Especial</h2>
             </br>
-            <form id= 'formane' name="formane">
+            <form id= 'formane' name="formane" action="anadirne.php">
             <table>
     <tbody>
         <tr>
             
-            <td>Grupo/cliente <input name="grucli" id="grucli" value="<?php echo $row2['grupo'] ?>" type="text"> </td>
+            <td>Grupo/cliente <input name="grucli" id="grucli" value="<?php echo $row2['grupo'] ?>" type="text" required> </td>
             <td>Facturacion dealer o directo cliente
                 <div class="row">    
             <div class="input-field col s12">
-                    <select class="browser-default black-text" name="whofacture" id="whofacture">
+                    <select class="browser-default black-text" name="whofacture" id="whofacture" required>
                         <br>
                         <option value="" disabled selected>Elije uno</option>
                         <?php
@@ -178,11 +178,12 @@ if (@!$_SESSION['user']) {
 
                     
                 </td>
-            <td>Folio(N° NE) <input name="folio" id="folio" type="text" value="<?php echo $folio; ?>"></td>
+            <td>Folio(N° NE) <input name="folio" id="folio" type="text" value="<?php echo $folio; ?>" <?php if($row2['roll']==1){ ?>  <?php }else{?> readonly <?php }?>></td>
         </tr>
         <tr>
-            <td>Concesionario <input type="text" name="concecionario" id="concecionario" value="<?php echo $row3['des_concecion'] ?>"></td>
-            <td>Nombre <input type="text" name="quienes" id="quienes" value="<?php echo $row2['nombre'].' '.$row2['apellido_p'].' '.$row2['apellido_m'] ?>">
+            <td>Concesionario <input type="text" name="concecionario" id="concecionario" value="<?php echo $row3['des_concecion'] ?>" required></td>
+            
+            <td>Nombre <input type="text" name="quienes" id="quienes" value="<?php echo $row2['nombre'].' '.$row2['apellido_p'].' '.$row2['apellido_m'] ?>" required>
                 
                 
             </td>
@@ -197,7 +198,7 @@ if (@!$_SESSION['user']) {
         <tr>
             <td>Explique brevemente la importancia de aprovar esta negociacion:</td>
         </tr><tr>
-            <td><input type="text" name="descripcion" id="descripcion"></td>
+            <td><input type="text" name="descripcion" id="descripcion" required></td>
         </tr>
 
     </tbody>
@@ -256,7 +257,7 @@ if (@!$_SESSION['user']) {
             <td>Nombre del producto</td>
             <td>
                 
-                <select class="browser-default black-text" name="busqueda" id="busqueda" autocomplete="off" onchange="buscar();">
+                <select class="browser-default black-text" name="busqueda" id="busqueda" autocomplete="off" onchange="buscar();" required>
                         <br>
                         <option value="" selected>Elije uno</option>
                         
@@ -649,7 +650,7 @@ if (@!$_SESSION['user']) {
         </tr>
         <tr>
             <td>Año modelo</td>
-            <td><input type="number" min="1900" max="2099" step="1" value="<?php echo date("Y"); ?>"  id="aniomodel1" name="aniomodel1"</td>
+            <td><input type="number" min="1900" max="2099" step="1" value="<?php echo date("Y"); ?>"  id="aniomodel1" name="aniomodel1" required></td>
             <td><input type="number" min="1900" max="2099" step="1" value="<?php echo date("Y"); ?>"  id="aniomodel2" name="aniomodel2"></td>
             <td><input type="number" min="1900" max="2099" step="1" value="<?php echo date("Y"); ?>"  id="aniomodel3" name="aniomodel3"></td>
             <td><input type="number" min="1900" max="2099" step="1" value="<?php echo date("Y"); ?>"  id="aniomodel4" name="aniomodel4"></td>
@@ -667,7 +668,7 @@ if (@!$_SESSION['user']) {
         
         <tr>
             <td>Volumen (cantidad de unidades)</td>
-            <td><input type="number" id="uno"   name="uno"    value="0" onchange="sumar(uno,dos,tres,cuatro,cinco,seis,siete)" ></td>
+            <td><input type="number" id="uno"   name="uno"    value="0" onchange="sumar(uno,dos,tres,cuatro,cinco,seis,siete)" required></td>
             <td><input type="number" id="dos"   name="dos"    value="0" onchange="sumar(uno,dos,tres,cuatro,cinco,seis,siete)" ></td>
             <td><input type="number" id="tres"  name="tres"   value="0" onchange="sumar(uno,dos,tres,cuatro,cinco,seis,siete)" ></td>
             <td><input type="number" id="cuatro"name="cuatro" value="0" onchange="sumar(uno,dos,tres,cuatro,cinco,seis,siete)" ></td>
@@ -682,7 +683,7 @@ if (@!$_SESSION['user']) {
         <tr>
             <td>Moneda de calculo</td>
             <td>
-                <select class="browser-default black-text" name="money1" id="money1">
+                <select class="browser-default black-text" name="money1" id="money1" required>
                         <br>
                         <option value="" disabled selected>Elije uno</option>
                         <?php
@@ -797,7 +798,7 @@ if (@!$_SESSION['user']) {
         </tr>
         <tr>
             <td>Precio Solicitado</td>
-            <td><input type="number" value="0" name="psoli1" id="psoli1" onchange="desc();"></td>
+            <td><input type="number" value="0" name="psoli1" id="psoli1" onchange="desc();" required></td>
             <td><input type="number" value="0" name="psoli2" id="psoli2"></td>
             <td><input type="number" value="0" name="psoli3" id="psoli3"></td>
             <td><input type="number" value="0" name="psoli4" id="psoli4"></td>
@@ -817,7 +818,7 @@ if (@!$_SESSION['user']) {
         </tr>
         <tr>
             <td>Descuento - %</td>
-            <td><input type="number" value="0" name="porciento1" id="porciento1" onmousemove="pordecu();"></td>
+            <td><input type="number" step="any" value="0" name="porciento1" id="porciento1" onmousemove="pordecu();"></td>
             <td><input type="number" value="0" name="porciento2" id="porciento2"></td>
             <td><input type="number" value="0" name="porciento3" id="porciento3"></td>
             <td><input type="number" value="0" name="porciento4" id="porciento4"></td>
@@ -827,7 +828,7 @@ if (@!$_SESSION['user']) {
         </tr>
         <tr>
             <td>Fecha de facturacion MTB</td>
-            <td><input type="month" name="facturedate1" id="facturedate1"  style="width:150px" ></td>
+            <td><input type="month" name="facturedate1" id="facturedate1"  style="width:150px" required></td>
             <td><input type="month" name="facturedate2" id="facturedate2"  style="width:150px" ></td>
             <td><input type="month" name="facturedate3" id="facturedate3"  style="width:150px" ></td>
             <td><input type="month" name="facturedate4" id="facturedate4"  style="width:150px" ></td>
@@ -1270,7 +1271,13 @@ if (@!$_SESSION['user']) {
 
         </tbody>
 </table>
-        
+            <br>
+            <br>
+            <br>
+            <br>
+        <div class="center-align">
+              <button type="submit" form="formane" class="btn waves-effect waves-light btn-large "><i class="material-icons right">input</i>Ingresar</button>  
+                </div>
 
             </div> 
         </div>
@@ -1329,7 +1336,7 @@ if (@!$_SESSION['user']) {
     
     function prelist(){
         var resulk;
-        rp1=$("#resultadoBusqueda").val();
+        rp1=$("#resultadoBusqueda1").val();
         rpc1=$("#resultadoca").val();
         resulk=parseInt(rp1)+parseInt(rpc1);
         
@@ -1348,7 +1355,7 @@ if (@!$_SESSION['user']) {
     function pordecu(){
         var porciento;
         
-        porc1=$("#psoli1").val();
+        porc1=$("#descu1").val();
         porc2=$("#totalisimo").val();
         puerco1=parseFloat(porc1)*100;
         pasalo1=parseFloat(puerco1)/parseFloat(porc2);
@@ -1391,11 +1398,12 @@ if (@!$_SESSION['user']) {
                 if (textoBusqueda != "") {
                     $.post("buscar.php", {valorBusqueda: textoBusqueda}, function(mensaje) {
                     s = parseInt(mensaje);
-                    $("#resultadoBusqueda").val(s);
+                    $("#resultadoBusqueda1").val(s);
+                
                 
                 }); 
                 } else { 
-                $("#resultadoBusqueda").html('0');
+                $("#resultadoBusqueda1").html('0');
                 };
                 };
           
